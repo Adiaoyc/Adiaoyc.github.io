@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Adiaoyc Blog</title><link>https://diaoyc.github.io/</link><description>Recent content on Adiaoyc Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 20 Jun 2026 10:44:34 +0000</lastBuildDate><atom:link href="https://diaoyc.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>My First Post</title><link>https://diaoyc.github.io/content/my-first-post/</link><pubDate>Sat, 20 Jun 2026 10:44:34 +0000</pubDate><guid>https://diaoyc.github.io/content/my-first-post/</guid><description>&lt;p&gt;这是我的第一篇博客文章。&lt;/p&gt;
+&lt;h2 id="二级标题"&gt;二级标题&lt;/h2&gt;
+&lt;p&gt;这里是正文内容。你可以使用 &lt;strong&gt;粗体&lt;/strong&gt; 和 &lt;em&gt;斜体&lt;/em&gt; 等Markdown语法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;列表项1&lt;/li&gt;
+&lt;li&gt;列表项2&lt;/li&gt;
+&lt;li&gt;列表项3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这是一段引用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;代码示例：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;&amp;#34;Hello, Hugo!&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>First</title><link>https://diaoyc.github.io/content/first/</link><pubDate>Sat, 20 Jun 2026 10:39:37 +0000</pubDate><guid>https://diaoyc.github.io/content/first/</guid><description>&lt;p&gt;hello !!!!!!!!&lt;/p&gt;</description></item></channel></rss>
