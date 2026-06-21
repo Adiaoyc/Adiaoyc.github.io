@@ -10,21 +10,23 @@
 <meta name="description" content="中间件相当于是请求&#x2F;响应拦截器，可以在请求进入路由处理之前，以及响应返回给客户之前，执行一些全局的处理逻辑。 如可以在中间件中做如下的事情： 鉴权&#x2F;权限检查 记录访问日志 请求数据预处理(JSON解码，Header检查等) 接口限流 黑名单拦截 中间件定义方式1.装饰器模式(@app.middleware(‘http’))这是FastAp...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FastAPI的中间件定义的三种方式 | Adiaoyc Blog">
-<meta property="og:url" content="http://example.com/2026/06/21/FastAPI%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/">
+<meta property="og:url" content="https://adiaoyc.github.io/2026/06/21/FastAPI%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/index/">
 <meta property="og:site_name" content="Adiaoyc Blog">
 <meta property="og:description" content="中间件相当于是请求&#x2F;响应拦截器，可以在请求进入路由处理之前，以及响应返回给客户之前，执行一些全局的处理逻辑。 如可以在中间件中做如下的事情： 鉴权&#x2F;权限检查 记录访问日志 请求数据预处理(JSON解码，Header检查等) 接口限流 黑名单拦截 中间件定义方式1.装饰器模式(@app.middleware(‘http’))这是FastAp...">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://adiaoyc.github.io/img/bg/bg3.jpg">
 <meta property="article:published_time" content="2026-06-21T13:20:35.000Z">
-<meta property="article:modified_time" content="2026-06-21T14:08:15.598Z">
+<meta property="article:modified_time" content="2026-06-21T16:34:14.666Z">
 <meta property="article:author" content="Adiaoyc">
 <meta property="article:tag" content="FastApi">
 <meta property="article:tag" content="中间件">
 <meta name="twitter:card" content="summary">
-<link rel="canonical" href="http://example.com/2026/06/21/FastAPI%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/">
+<meta name="twitter:image" content="https://adiaoyc.github.io/img/bg/bg3.jpg">
+<link rel="canonical" href="https://adiaoyc.github.io/2026/06/21/FastAPI%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/index/">
 
-<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/blog/images/favicon.svg" type="image/svg+xml">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"FastAPI的中间件定义的三种方式","name":"FastAPI的中间件定义的三种方式 | Adiaoyc Blog","description":"中间件相当于是请求&#x2F;响应拦截器，可以在请求进入路由处理之前，以及响应返回给客户之前，执行一些全局的处理逻辑。 如可以在中间件中做如下的事情： 鉴权&#x2F;权限检查 记录访问日志 请求数据预处理(JSON解码，Header检查等) 接口限流 黑名单拦截 中间件定义方式1.装饰器模式(@app.middleware(‘http’))这是FastAp...","url":"http://example.com/2026/06/21/FastAPI%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/","inLanguage":"zh-CN","isPartOf":{"@type":"WebSite","name":"Adiaoyc Blog","url":"http://example.com/"},"mainEntityOfPage":"http://example.com/2026/06/21/FastAPI%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/","datePublished":"2026-06-21T13:20:35.000Z","dateModified":"2026-06-21T14:08:15.598Z","author":{"@type":"Person","name":"Adiaoyc"},"publisher":{"@type":"Organization","name":"Adiaoyc Blog"},"keywords":"FastApi, 中间件"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"FastAPI的中间件定义的三种方式","name":"FastAPI的中间件定义的三种方式 | Adiaoyc Blog","description":"中间件相当于是请求&#x2F;响应拦截器，可以在请求进入路由处理之前，以及响应返回给客户之前，执行一些全局的处理逻辑。 如可以在中间件中做如下的事情： 鉴权&#x2F;权限检查 记录访问日志 请求数据预处理(JSON解码，Header检查等) 接口限流 黑名单拦截 中间件定义方式1.装饰器模式(@app.middleware(‘http’))这是FastAp...","url":"https://adiaoyc.github.io/2026/06/21/FastAPI%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/index/","inLanguage":"zh-CN","isPartOf":{"@type":"WebSite","name":"Adiaoyc Blog","url":"https://adiaoyc.github.io/"},"image":["https://adiaoyc.github.io/blog/img/bg/bg3.jpg"],"mainEntityOfPage":"https://adiaoyc.github.io/2026/06/21/FastAPI%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/index/","datePublished":"2026-06-21T13:20:35.000Z","dateModified":"2026-06-21T16:34:14.666Z","author":{"@type":"Person","name":"Adiaoyc"},"publisher":{"@type":"Organization","name":"Adiaoyc Blog"},"keywords":"FastApi, 中间件"}</script>
 
 <script>
   (function () {
@@ -44,7 +46,7 @@
   })();
 </script>
 
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/blog/css/style.css">
 
 
   
@@ -59,7 +61,7 @@
 
 
   
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 8.1.2"></head>
 
 <body
   class="is-post tag-style-tape"
@@ -89,14 +91,14 @@
   <div class="brand">
     <div class="brand-mark-wrapper">
       
-        <a class="brand-mark" href="/" aria-label="FlatPaper 首页">
+        <a class="brand-mark" href="/blog/" aria-label="FlatPaper 首页">
           
 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1" /><rect width="7" height="7" x="14" y="3" rx="1" /><rect width="7" height="7" x="14" y="14" rx="1" /><rect width="7" height="7" x="3" y="14" rx="1" /></svg>
 
         </a>
       
     </div>
-    <a class="brand-text" href="/">Adiaoyc Blog</a>
+    <a class="brand-text" href="/blog/">Adiaoyc Blog</a>
   </div>
 
   <nav class="site-nav" aria-label="主导航">
@@ -200,7 +202,7 @@
     <div class="socials">
       
       
-        <a href="/atom.xml" aria-label="RSS feed" title="RSS">
+        <a href="/blog/atom.xml" aria-label="RSS feed" title="RSS">
           
 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rss" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
 
@@ -258,7 +260,7 @@
           
 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
 
-          <a class="meta-tag-link" href="/tags/FastApi/">#FastApi</a><a class="meta-tag-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">#中间件</a>
+          <a class="meta-tag-link" href="/blog/tags/FastApi/">#FastApi</a><a class="meta-tag-link" href="/blog/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">#中间件</a>
         </span>
       
     </div>
@@ -268,7 +270,8 @@
 
 
   <div class="article-content">
-    <p>中间件相当于是请求&#x2F;响应拦截器，可以在请求进入路由处理之前，以及响应返回给客户之前，执行一些全局的处理逻辑。</p>
+    <p><img src="/blog/0po1en.jpg" alt="文章封面图"></p>
+<p>中间件相当于是请求&#x2F;响应拦截器，可以在请求进入路由处理之前，以及响应返回给客户之前，执行一些全局的处理逻辑。</p>
 <p>如可以在中间件中做如下的事情：</p>
 <ul>
 <li>鉴权&#x2F;权限检查</li>
@@ -278,7 +281,7 @@
 <li>黑名单拦截</li>
 </ul>
 <h1 id="中间件定义方式"><a href="#中间件定义方式" class="headerlink" title="中间件定义方式"></a>中间件定义方式</h1><h2 id="1-装饰器模式-app-middleware-‘http’"><a href="#1-装饰器模式-app-middleware-‘http’" class="headerlink" title="1.装饰器模式(@app.middleware(‘http’))"></a>1.装饰器模式(@app.middleware(‘http’))</h2><p>这是FastApi官方推荐的简单方式，适合写轻量级的中间件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> fastapi <span class="hljs-keyword">import</span> FastAPI, Request<br><span class="hljs-keyword">import</span> time<br><br>app = FastAPI()<br><br><span class="hljs-meta">@app.middleware(<span class="hljs-params"><span class="hljs-string">&quot;http&quot;</span></span>)</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">log_requests</span>(<span class="hljs-params">request: Request, call_next</span>):<br>    start_time = time.time()<br>    <br>    <span class="hljs-comment"># 请求前逻辑</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;请求: <span class="hljs-subst">&#123;request.method&#125;</span> <span class="hljs-subst">&#123;request.url&#125;</span>&quot;</span>)<br>    <br>    <span class="hljs-comment"># 调用下一个中间件 / 路由处理</span><br>    response = <span class="hljs-keyword">await</span> call_next(request)<br>    <br>    <span class="hljs-comment"># 请求后逻辑</span><br>    process_time = time.time() - start_time<br>    response.headers[<span class="hljs-string">&quot;X-Process-Time&quot;</span>] = <span class="hljs-built_in">str</span>(process_time)<br>    <br>    <span class="hljs-keyword">return</span> response<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fastapi <span class="keyword">import</span> FastAPI, Request</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.middleware(<span class="params"><span class="string">&quot;http&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">log_requests</span>(<span class="params">request: Request, call_next</span>):</span><br><span class="line">    start_time = time.time()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 请求前逻辑</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;请求: <span class="subst">&#123;request.method&#125;</span> <span class="subst">&#123;request.url&#125;</span>&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 调用下一个中间件 / 路由处理</span></span><br><span class="line">    response = <span class="keyword">await</span> call_next(request)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 请求后逻辑</span></span><br><span class="line">    process_time = time.time() - start_time</span><br><span class="line">    response.headers[<span class="string">&quot;X-Process-Time&quot;</span>] = <span class="built_in">str</span>(process_time)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure>
 
 <p>特点:</p>
 <ul>
@@ -287,7 +290,7 @@
 <li>不适合复杂依赖注入和跨多类型请求(如webSocket)</li>
 </ul>
 <h2 id="2-类继承方式-BaseHTTPMiddleware"><a href="#2-类继承方式-BaseHTTPMiddleware" class="headerlink" title="2.类继承方式(BaseHTTPMiddleware)"></a>2.类继承方式(BaseHTTPMiddleware)</h2><p>来自 starlette.middleware.base.BaseHTTPMiddleware，适合封装成可复用的中间件类。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> fastapi <span class="hljs-keyword">import</span> FastAPI, Request<br><span class="hljs-keyword">from</span> starlette.middleware.base <span class="hljs-keyword">import</span> BaseHTTPMiddleware<br><span class="hljs-keyword">import</span> time<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TimerMiddleware</span>(<span class="hljs-title class_ inherited__">BaseHTTPMiddleware</span>):<br>    <span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">dispatch</span>(<span class="hljs-params">self, request: Request, call_next</span>):<br>        start_time = time.time()<br>        response = <span class="hljs-keyword">await</span> call_next(request)<br>        process_time = time.time() - start_time<br>        response.headers[<span class="hljs-string">&quot;X-Process-Time&quot;</span>] = <span class="hljs-built_in">str</span>(process_time)<br>        <span class="hljs-keyword">return</span> response<br><br>app = FastAPI()<br>app.add_middleware(TimerMiddleware)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fastapi <span class="keyword">import</span> FastAPI, Request</span><br><span class="line"><span class="keyword">from</span> starlette.middleware.base <span class="keyword">import</span> BaseHTTPMiddleware</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TimerMiddleware</span>(<span class="title class_ inherited__">BaseHTTPMiddleware</span>):</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">dispatch</span>(<span class="params">self, request: Request, call_next</span>):</span><br><span class="line">        start_time = time.time()</span><br><span class="line">        response = <span class="keyword">await</span> call_next(request)</span><br><span class="line">        process_time = time.time() - start_time</span><br><span class="line">        response.headers[<span class="string">&quot;X-Process-Time&quot;</span>] = <span class="built_in">str</span>(process_time)</span><br><span class="line">        <span class="keyword">return</span> response</span><br><span class="line"></span><br><span class="line">app = FastAPI()</span><br><span class="line">app.add_middleware(TimerMiddleware)</span><br></pre></td></tr></table></figure>
 
 <p>特点：</p>
 <ul>
@@ -296,7 +299,7 @@
 <li>更容易与第三方库或框架的中间件机制集成</li>
 </ul>
 <h2 id="3-ASGI原生中间件"><a href="#3-ASGI原生中间件" class="headerlink" title="3.ASGI原生中间件"></a>3.ASGI原生中间件</h2><p>这种方式是写的一个符合ASGI规范的函数或类， 能拦截所有类型的请求(http， WebSocket，lifespan)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ASGIMiddleware</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, app</span>):<br>        <span class="hljs-variable language_">self</span>.app = app<br><br>    <span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">__call__</span>(<span class="hljs-params">self, scope, receive, send</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;收到请求类型: <span class="hljs-subst">&#123;scope[<span class="hljs-string">&#x27;type&#x27;</span>]&#125;</span>&quot;</span>)<br>        <span class="hljs-keyword">await</span> <span class="hljs-variable language_">self</span>.app(scope, receive, send)<br><br>app = FastAPI()<br><span class="hljs-comment"># app = ASGIMiddleware(app)</span><br>app.add_middleware(ASGIMiddleware, app)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ASGIMiddleware</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, app</span>):</span><br><span class="line">        <span class="variable language_">self</span>.app = app</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self, scope, receive, send</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;收到请求类型: <span class="subst">&#123;scope[<span class="string">&#x27;type&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">await</span> <span class="variable language_">self</span>.app(scope, receive, send)</span><br><span class="line"></span><br><span class="line">app = FastAPI()</span><br><span class="line"><span class="comment"># app = ASGIMiddleware(app)</span></span><br><span class="line">app.add_middleware(ASGIMiddleware, app)</span><br></pre></td></tr></table></figure>
 
 <p>特点：</p>
 <ul>
@@ -350,7 +353,7 @@
       </span>
     
     
-      <a class="article-action article-action--next" href="/2026/06/21/hello-world/">
+      <a class="article-action article-action--next" href="/blog/2026/06/21/hello-world/">
         <span class="action-label">下一篇</span>
         <span class="action-title">Hello World</span>
         
@@ -386,7 +389,7 @@
 </footer>
 
   
-<div class="search-panel" aria-hidden="true" data-index-url="/flatpaper-search.json">
+<div class="search-panel" aria-hidden="true" data-index-url="/blog/flatpaper-search.json">
   <div class="search-backdrop js-search-close"></div>
   <section class="search-dialog" role="dialog" aria-modal="true" aria-label="搜索文章">
     <span class="tape tape--top-left" aria-hidden="true"></span>
@@ -414,7 +417,7 @@
   window.FLATPAPER_I18N = {"language":"zh-CN","common.posts":"文章","common.categories":"分类","common.tags":"标签","common.comments":"评论","common.share":"分享","common.page":"页面","common.archive":"归档","common.post_list":"文章列表","common.search_posts":"搜索文章","common.random_posts":"随机文章","common.reward":"赞赏","common.view_all":"查看全部","pagination.prev":"上一页","pagination.next":"下一页","pagination.post_pager":"文章分页","pagination.archive_pager":"归档分页","index.featured":"精选文章","index.pinned":"置顶","index.read_more":"阅读全文","index.previous_slide":"上一张","index.next_slide":"下一张","index.carousel_pagination":"轮播页码","index.carousel_slide":"第 %d 张","index.latest_posts":"最新文章","index.empty_posts":"还没有文章。创建第一篇文章后，这里会显示最新内容。","archive.title":"归档","archive.post_list":"文章列表","taxonomy.category_count":"%d 篇","taxonomy.empty_categories":"暂时还没有分类。","taxonomy.empty_tags":"暂时还没有标签。","links.label":"友链","links.title":"友情链接","links.empty_data":"暂未加载到友链数据。请确认 source/_data/links.yml 存在并已 hexo clean。","links.rss_label":"%s 的 RSS","post.scroll_to_comments":"跳转到评论区","post.previous":"上一篇","post.next":"下一篇","post.no_previous":"没有更早的文章了","post.no_next":"已经是最新的一篇","post.back_to_top":"返回顶部","post.related_posts":"相关文章","post.view_more":"查看更多","not_found.label":"页面走丢了","not_found.title":"找不到这个页面","not_found.text":"这个地址可能已经移动、删除，或者从未存在。","not_found.home":"返回首页","not_found.search":"搜索文章","search.placeholder":"输入关键词，按 Esc 关闭","search.empty":"输入关键词后显示匹配的文章","search.loading":"正在加载搜索索引…","search.load_failed":"搜索索引加载失败，请重新打开搜索重试","search.no_result":"没有找到与 \"%s\" 相关的文章","search.close":"关闭搜索","code.copy":"复制代码","code.collapse":"折叠代码","code.expand":"展开代码","heading.anchor":"链接到此节: %s","head.tag":"标签：%s","head.category":"分类：%s","head.archive":"归档","head.archive_with_date":"归档：%s","head.page_number":"第 %d 页","navigation.primary":"主导航","navigation.mobile":"移动端导航","navigation.brand_home":"FlatPaper 首页","navigation.open_sidebar":"打开侧边栏","navigation.close_sidebar":"关闭侧边栏","navigation.sidebar":"侧边栏","navigation.sidebar_tools":"侧边栏工具","navigation.site_links":"站点链接","navigation.site_info":"站点信息","colors.choose_theme_color":"选择主题色","colors.theme_color":"主题色","colors.toggle_color_mode":"切换颜色模式","colors.green":"绿色","colors.pink":"粉色","colors.sakura":"樱花粉","colors.blue":"蓝色","colors.orange":"橙色","colors.black":"黑色","profile.default_bio":"热爱生活，热爱代码，喜欢分享技术与生活中的点滴。","welcome.cta":"开始阅读","welcome.title":"欢迎来到 FlatPaper","welcome.text":"一个专注于内容与阅读体验的博客主题。","toc.title":"文章目录","toc.empty":"目录会根据文章标题自动生成。","toc.expand_all":"展开全部目录","toc.collapse_all":"收起全部目录","sidebar.hot_tags":"热门标签","sidebar.latest_posts":"最新文章"};
   </script>
   
-<script src="/js/main.js"></script>
+<script src="/blog/js/main.js"></script>
 
   
 </body>
